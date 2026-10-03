@@ -1,0 +1,8 @@
+async function api(url,opt){let r=await fetch(url,opt);let x=await r.json();if(!r.ok)throw Error(x.error||"Error");return x}
+async function register(){try{await api('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:rname.value,email:remail.value,password:rpass.value})});show()}catch(e){alert(e.message)}}
+async function login(){try{let x=await api('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:lemail.value,password:lpass.value})});show(x)}catch(e){alert(e.message)}}
+async function show(){document.getElementById('auth').hidden=true;document.getElementById('app').hidden=false;let u=await api('/api/me');hello.textContent='Hello '+u.name;points.textContent=u.points;money.textContent=(u.points/1000).toFixed(2);let t=await api('/api/tasks');tasks.innerHTML=t.map(x=>'<div class="card"><h3>'+x.title+'</h3><p>'+x.description+'</p><button onclick="complete('+x.id+')">Earn '+x.reward_points+' points</button></div>').join('')}
+async function complete(id){try{let x=await api('/api/tasks/'+id+'/complete',{method:'POST'});alert('Earned '+x.earned+' points');show()}catch(e){alert(e.message)}}
+async function withdraw(){try{await api('/api/withdrawals',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount:amount.value,iban:iban.value})});msg.textContent='Withdrawal request submitted for admin review.';show()}catch(e){msg.textContent=e.message}}
+async function logout(){await api('/api/logout',{method:'POST'});location.reload()}
+fetch('/api/me').then(r=>r.ok&&show()).catch(()=>{});

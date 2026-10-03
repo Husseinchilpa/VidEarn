@@ -1,0 +1,6 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VidEarn</title><link rel="stylesheet" href="style.css"></head>
+<body><main class="wrap"><h1>Vid<span>Earn</span></h1>
+<section id="auth"><div class="card"><h2>Create account</h2><input id="rname" placeholder="Name"><input id="remail" type="email" placeholder="Email"><input id="rpass" type="password" placeholder="Password (8+ characters)"><button onclick="register()">Register</button></div>
+<div class="card"><h2>Login</h2><input id="lemail" type="email" placeholder="Email"><input id="lpass" type="password" placeholder="Password"><button onclick="login()">Login</button></div></section>
+<section id="app" hidden><div class="bar"><b id="hello"></b><button onclick="logout()">Logout</button></div><div class="card"><h2>Balance</h2><div class="money">$<span id="money">0.00</span></div><p><span id="points">0</span> points · 1,000 points = $1</p></div>
+<h2>Tasks</h2><div id="tasks"></div><div class="card"><h2>Withdraw by bank transfer</h2><input id="amount" type="number" placeholder="Amount USD, minimum 5"><input id="iban" placeholder="Bank / IBAN"><button onclick="withdraw()">Request withdrawal</button></div><p id="msg"></p></section></main><script src="app.js"></script></body></html>
